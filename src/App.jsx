@@ -1,37 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { userDelete } from './store/reducers/UserReducer';
+import { Link, Route, Routes } from 'react-router-dom';
+import Users from './components/Users';
+import Home from './components/Home';
+import Products from './components/Products';
 
 const App = () => {
-    const { users } = useSelector((state) => state.UserReducer);
-    const dispatch = useDispatch();
-
-    const DeleteHandler = (index) => {
-        console.log(index);
-        dispatch(userDelete(index));
-    };
-
     return (
-        <div className="m-auto w-1/2 rounded-md container p-10 mt-5 bg-red-100">
-            <h1 className="text-2xl font-bold text-red-900">User List</h1>
-            <ul>
-                {users.map((user, index) => {
-                    return (
-                        <>
-                            <li key={user.id}>
-                                <h1>
-                                    {user.name}{' '}
-                                    <span
-                                        onClick={() => DeleteHandler(index)}
-                                        className="text-red-500 font-bold cursor-pointer"
-                                    >
-                                        X
-                                    </span>
-                                </h1>
-                            </li>
-                        </>
-                    );
-                })}
-            </ul>
+        <div className="w-screen h-screen">
+            <nav className="py-5 flex justify-center gap-10">
+                <Link to="/">Home</Link>
+                <Link to="/users">Users</Link>
+                <Link to="/products">Products</Link>
+            </nav>
+            <hr />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Users" element={<Users />} />
+                <Route path="/Products" element={<Products />} />
+            </Routes>
         </div>
     );
 };
