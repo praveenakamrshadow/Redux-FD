@@ -238,7 +238,15 @@ const initialState = {
 export const UserSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        userDelete: (state, action) => {
+            console.log(action);
+
+            state.users.splice(action.payload, 1);
+        },
+    },
 });
 
 export default UserSlice.reducer;
+
+export const { userDelete } = UserSlice.actions;
